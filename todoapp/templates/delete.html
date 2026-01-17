@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Task</title>
+     {% load static %}
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+
+<div class="container">  
+
+    <h2>Delete Task</h2>
+
+    <p>
+        Are you sure you want to delete  
+        <strong>"{{ task.title }}"</strong> ?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="btn delete-btn">
+            Yes, Delete
+        </button>
+
+        <a href="{% url 'home' %}" class="btn cancel-btn">
+            Cancel
+        </a>
+    </form>
+
+</div>
+
+</body>
+</html>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+ 
+<div class="task-box">
+    <h2>My ToDo List</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Enter task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr>
+
+    {% for task in tasks %}
+    <div class="task-item">
+        <span>
+        {% if task.completed %}
+            <s>{{ task.title }}</s> ✅
+        {% else %}
+            {{ task.title }}
+        {% endif %}
+        </span>
+
+        <span>
+            <a href="{% url 'complete' task.id %}">✔</a>
+            <a href="{% url 'delete' task.id %}">❌</a>
+        </span>
+    </div>
+    {% empty %}
+        <p>No tasks yet</p>
+    {% endfor %}
+
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+</html>
